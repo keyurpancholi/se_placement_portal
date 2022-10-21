@@ -9,5 +9,15 @@ const jobSchema = new Schema({
     description: {
         type: String,
         required: true
+    },
+    designation: {
+        type: String,
+        required: true
+    },
+    salary: {
+        type: Number,
+        require: true
     }
-})
+}, {timestamps: true})
+
+module.exports = new mongoose.model('Job', jobSchema)

@@ -14,7 +14,15 @@ const userSchema = new Schema({
     type: String, 
     required: true
   },
+  cgpa: {
+    type: Number,
+    required: true
+  },
+  branch: {
+    type: String, 
+    required: true
+  },
   jobs: [{type: Schema.Types.ObjectId, ref: 'Job'}]
-})
+}, {timestamps: true})
 
 module.exports =  mongoose.model('User', userSchema)
