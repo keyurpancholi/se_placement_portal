@@ -129,6 +129,7 @@ exports.login = (req, res, next) => {
           email: loadedAdmin.email,
           password: loadedAdmin.password,
           userId: loadedAdmin._id,
+          isAdmin: true
         },
         "seplacementportal",
         { expiresIn: "1hr" }
