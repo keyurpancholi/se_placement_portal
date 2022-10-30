@@ -14,11 +14,9 @@ import {useNavigate } from 'react-router-dom';
 function Job() {
   const navigate = useNavigate();
   return (
-    
     <Sidebar>
-   <Container 
-   sx={{marginTop:5}}>
-    <Card>
+   <Container>
+    <Card elevation={3}>
         <CardContent>
         
 <Grid
