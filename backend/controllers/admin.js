@@ -41,16 +41,16 @@ exports.addUser = (req, res, next) => {
 };
 
 exports.addNewJob = (req, res, next) => {
-  const companyName = req.body.companyName;
-  const description = req.body.description;
-  const designation = req.body.designation;
-  const salary = req.body.salary;
+  const {companyName, position, salary, description, type, category, mingpa} = req.body
 
   const job = new Job({
     companyName: companyName,
-    description: description,
-    designation: designation,
+    position: position,
     salary: salary,
+    description: description,
+    type: type,
+    category: category,
+    mingpa: mingpa
   });
 
   job

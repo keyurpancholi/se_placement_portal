@@ -29,7 +29,7 @@ exports.login = (req, res, next) => {
         throw error;
       }
       const token = jwt.sign(
-        { email: email, password: loadedUser.password, userId: loadedUser._id.toISOString() },
+        { email: email, password: loadedUser.password, userId: loadedUser._id.toString() },
         "seplacementportal",
         { expiresIn: "1h" }
       );

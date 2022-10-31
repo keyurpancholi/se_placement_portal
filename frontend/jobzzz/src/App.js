@@ -8,6 +8,7 @@ import React from 'react';
 import Signup from "./pages/Signup/Signup"
 import Login from "./pages/Login/Login"
 import Home from "./pages/Home/Home"
+import AdminLogin from './pages/adminLogin/AdminLogin'
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
       <Route path="/addJob" element={<AddJob />}/>
       <Route path="/profile" element={<Profile />}/>
       <Route path="/jobDetails" element={<JobDetails />}/>
+      <Route path='/admin/login' element={<AdminLogin />} /> 
      </Routes>
     </div>
   )
