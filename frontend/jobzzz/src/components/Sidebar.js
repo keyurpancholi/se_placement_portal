@@ -14,7 +14,7 @@ import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import { useLocation, useNavigate } from 'react-router-dom'; 
 import Container from '@mui/material/Container'; 
 import './Sidebar.css';
-import {white} from '@mui/material/colors';
+import LogoutIcon from '@mui/icons-material/Logout';
 
 const drawerWidth = 240;
 
@@ -38,6 +38,10 @@ function Sidebar({children}) {
             text: 'Profile',
          icon: <AccountBoxIcon color="white" />,
          path: '/profile'
+        },{
+          text: 'Logout',
+         icon: <LogoutIcon color="white" />,
+         path: '/'
         }
      ]
 
