@@ -1,8 +1,8 @@
 const router = require('express').Router()
 const adminController = require('../controllers/admin')
-const isAdmin = require("../middleware/isAdmin")
+const isAuth = require('../middleware/isAuth')
 
-router.post('/addNewJob', isAdmin, adminController.addNewJob)
+router.post('/addNewJob', isAuth, adminController.addNewJob)
 
 router.post('/login', adminController.login)
 
