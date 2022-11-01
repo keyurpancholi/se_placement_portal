@@ -1,10 +1,8 @@
 import React, { useState } from 'react'
 import Drawer from '@mui/material/Drawer';
-import Toolbar from '@mui/material/Toolbar';
 import List from '@mui/material/List';
 import Divider from '@mui/material/Divider';
 import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
@@ -65,7 +63,8 @@ function Sidebar({children}) {
                sx={{fontFamily:'initial',
                marginLeft:1,
                marginTop:2,
-               marginBottom:2,}}>
+               marginBottom:2,
+               fontWeight:'bold'}}>
                     TPO Portal
                 </Typography>
         <Divider />

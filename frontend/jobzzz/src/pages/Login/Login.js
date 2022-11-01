@@ -5,7 +5,6 @@ import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
-// import Link from '@mui/material/Link';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
@@ -16,10 +15,14 @@ import {useState} from "react"
 import {useNavigate, Link} from "react-router-dom"
 
 function Copyright(props) {
+  const navigate=useNavigate()
+
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
       {'Copyright © '}
-      <Link color="inherit" href="/">
+      <Link color="inherit" href="/"
+      component='button'
+      onClick={() => navigate('/')}>
         TPO portal
       </Link>{' '}
       {new Date().getFullYear()}
@@ -76,11 +79,11 @@ export default function SignInSide(props) {
           sm={4}
           md={7}
           sx={{
-            backgroundImage: 'url(https://customer.impexdsr.in/images/bg.jpg)',
+            backgroundImage: 'url(https://res.cloudinary.com/black-insure/image/upload/v1646054564/Login-min_1_wyovtx.gif)',
             backgroundRepeat: 'no-repeat',
             backgroundColor: (t) =>
               t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
-            backgroundSize: 'cover',
+            backgroundSize:'500px',
             backgroundPosition: 'center',
           }}
         />
@@ -94,7 +97,9 @@ export default function SignInSide(props) {
               alignItems: 'center',
             }}
           >
-            <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+            <Avatar 
+            src="/broken-image.jpg"
+            sx={{ m: 1, backgroundColor:'primary' }}>
               <LockOutlinedIcon />
             </Avatar>
             <Typography variant="h5">
@@ -124,6 +129,7 @@ export default function SignInSide(props) {
               <FormControlLabel
                 control={<Checkbox value="remember" color="primary" />}
                 label="Remember me"
+                sx={{display:'flex'}}
               />
               <Button
                 type="submit"

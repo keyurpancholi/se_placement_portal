@@ -84,6 +84,7 @@ export default function SignUp() {
             flexDirection: "column",
             alignItems: "center",
           }}
+          
         >
           <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
             <LockOutlinedIcon />
@@ -174,14 +175,6 @@ export default function SignUp() {
                   id="password"
                   autoComplete="new-password"
                   // ref={password}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <FormControlLabel
-                  control={
-                    <Checkbox value="allowExtraEmails" color="primary" />
-                  }
-                  label="I want to receive inspiration, marketing promotions and updates via email."
                 />
               </Grid>
             </Grid>
