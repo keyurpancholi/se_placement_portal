@@ -9,28 +9,35 @@ import CurrencyRupeeIcon from "@mui/icons-material/CurrencyRupee";
 import Sidebar from "../../components/Sidebar";
 import Grid from "@mui/material/Grid";
 import JobDetails from "../../components/jobDetails/JobDetails";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
-function Job() {
+function Job(props) {
   const navigate = useNavigate();
 
   const [jobs, setJobs] = useState([]);
-  const arr = ['hi', 'hello', 'hey']
+  const [flag, setFlag] = useState(false)
+
 
   useEffect(() => {
     fetch(`${process.env.REACT_APP_API_URL}viewJobs`)
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
-        setJobs(data.posts)
+        setJobs(data.posts);
       })
       .catch((err) => {
         console.log(err);
       });
   }, []);
 
+  const viewSingleJob = (job) => {
+    console.log(job)
+    props.viewJob(job)
+    setFlag(true)
+  }
+
   return (
-    <Sidebar>
+    <Sidebar isAdmin={props.isAdmin}>
       <Container>
         {/* <Card elevation={3}>
           <CardContent>
@@ -77,51 +84,59 @@ function Job() {
             </Grid>
           </CardContent>
         </Card> */}
-        {jobs.map(job => { return <Card elevation={3}>
-          <CardContent>
-            <Grid
-              container
-              direction="row"
-              justifyContent="space-between"
-              alignItems="center"
-            >
-              <Grid item>
+        {!flag && jobs.map((job) => {
+          return (
+            <Card elevation={3}>
+              <CardContent>
                 <Grid
                   container
                   direction="row"
-                  justifyContent="flex-start"
+                  justifyContent="space-between"
                   alignItems="center"
-                  spacing={3}
                 >
                   <Grid item>
-                    <Avatar
-                      alt="JP morgan logo"
-                      src="https://media2.vault.com/14343503/210909_jp-morgan_logo.jpg"
-                      sx={{ width: 56, height: 56 }}
-                    />
+                    <Grid
+                      container
+                      direction="row"
+                      justifyContent="flex-start"
+                      alignItems="center"
+                      spacing={3}
+                    >
+                      <Grid item>
+                        <Avatar
+                          alt="JP morgan logo"
+                          src="https://media2.vault.com/14343503/210909_jp-morgan_logo.jpg"
+                          sx={{ width: 56, height: 56 }}
+                        />
+                      </Grid>
+                      <Grid item>
+                        <Typography>{job.companyName}</Typography>
+                        <Typography sx={{ fontSize: 15, display: "flex" }}>
+                          {job.position}
+                        </Typography>
+                      </Grid>
+                    </Grid>
                   </Grid>
                   <Grid item>
-                    <Typography>{job.companyName}</Typography>
-                    <Typography sx={{ fontSize: 15, display: "flex" }}>
-                      {job.position}
-                    </Typography>
+                    
+                    <Button
+                      variant="contained"
+                      onClick={() => {
+                        viewSingleJob(job)
+                      }}
+                      sx={{ display: "flex", justifyContent: "flex-end" }}
+                      startIcon={<CurrencyRupeeIcon />}
+                    >
+                      {job.salary} LPA
+                    </Button>
+                    <Typography>{job.type}</Typography>
                   </Grid>
                 </Grid>
-              </Grid>
-              <Grid item>
-                <Button
-                  variant="contained"
-                  onClick={() => navigate("/jobDetails")}
-                  sx={{ display: "flex", justifyContent: "flex-end" }}
-                  startIcon={<CurrencyRupeeIcon />}
-                >
-                  {job.salary} LPA
-                </Button>
-                <Typography>{job.type}</Typography>
-              </Grid>
-            </Grid>
-          </CardContent>
-        </Card>})}
+              </CardContent>
+            </Card>
+          );
+        })}
+
       </Container>
     </Sidebar>
   );

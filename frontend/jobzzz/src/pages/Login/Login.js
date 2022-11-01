@@ -58,7 +58,7 @@ export default function SignInSide(props) {
         localStorage.setItem('token', data.token)
         localStorage.setItem('userId', data.userId)
 
-        navigate("/");
+        navigate("/jobs");
       })
       .catch((err) => {
         console.log(err);
