@@ -76,7 +76,7 @@ export default function SignInSide(props) {
           sm={4}
           md={7}
           sx={{
-            backgroundImage: 'url(https://customer.impexdsr.in/images/bg.jpg)',
+            backgroundImage: 'url(https://res.cloudinary.com/black-insure/image/upload/v1646054564/Login-min_1_wyovtx.gif)',
             backgroundRepeat: 'no-repeat',
             backgroundColor: (t) =>
               t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],

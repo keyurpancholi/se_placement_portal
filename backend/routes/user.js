@@ -2,10 +2,13 @@ const router = require("express").Router();
 const userController = require("../controllers/user");
 const { body } = require("express-validator");
 const User = require("../models/user");
+const isAuth = require("../middleware/isAuth")
 
 router.get("/viewJobs", userController.viewJobs);
 
-router.put("/applyForJob/:jobId", userController.applyForJob);
+router.get("/viewSingleJob/:jobId", userController.viewSingleJob)
+
+router.put("/applyForJob/:jobId", isAuth, userController.applyForJob);
 
 router.post("/login", userController.login);
 

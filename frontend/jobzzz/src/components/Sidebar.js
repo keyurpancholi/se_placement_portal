@@ -15,6 +15,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import Container from "@mui/material/Container";
 import "./Sidebar.css";
 import { white } from "@mui/material/colors";
+import LogoutIcon from "@mui/icons-material/Logout"
 
 const drawerWidth = 240;
 
@@ -28,17 +29,26 @@ function Sidebar(props) {
       text: "Jobs",
       icon: <WorkIcon color="white" />,
       path: "/jobs",
+      action: 'jobs'
     },
     {
       text: "Add New Job",
       icon: <AddCircleIcon color="white" />,
       path: "/addJob",
+      action: 'addJob'
     },
     {
       text: "Profile",
       icon: <AccountBoxIcon color="white" />,
       path: "/profile",
+      action: 'profile'
     },
+    {
+      text: "Logout",
+      icon: <LogoutIcon color="white" />,
+      path: "/",
+      action: 'logout'
+    }
   ];
 
   const menuItems2 = [
@@ -46,17 +56,26 @@ function Sidebar(props) {
       text: "Jobs",
       icon: <WorkIcon color="white" />,
       path: "/jobs",
+      action: 'jobs'
     },
     {
       text: "View applied Jobs",
       icon: <AddCircleIcon color="white" />,
       path: "/viewAppliedJobs",
+      action: 'View jobs'
     },
     {
       text: "Profile",
       icon: <AccountBoxIcon color="white" />,
       path: "/profile",
+      action: 'profile'
     },
+    {
+      text: "Logout",
+      icon: <LogoutIcon color="white" />,
+      path: "/",
+      action: 'logout'
+    }
   ];
 
   return (
@@ -123,7 +142,13 @@ function Sidebar(props) {
                   button
                   key={item.text}
                   onClick={() => {
-                    navigate(item.path);
+                    if(item.action==='logout'){
+                      localStorage.removeItem('userId')
+                      localStorage.removeItem('token')
+                      navigate(item.path)
+                    } else {
+                      navigate(item.path)
+                    }
                   }}
                 >
                   <ListItemIcon>{item.icon}</ListItemIcon>

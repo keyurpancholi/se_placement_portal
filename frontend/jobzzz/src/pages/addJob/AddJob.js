@@ -13,7 +13,7 @@ import Checkbox from "@mui/material/Checkbox";
 import FormGroup from "@mui/material/FormGroup";
 import { Form } from "react-router-dom";
 
-function AddJob() {
+function AddJob(props) {
   const [name, setName] = useState("");
   const [nameError, setNameError] = useState(false);
   const [position, setPosition] = useState("");
@@ -89,7 +89,7 @@ function AddJob() {
   };
 
   return (
-    <Sidebar>
+    <Sidebar isLogout={props.isLogout} >
       <Container
         sx={{
           backgroundColor: "#f5f5f5",

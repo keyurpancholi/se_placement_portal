@@ -15,8 +15,7 @@ function Job(props) {
   const navigate = useNavigate();
 
   const [jobs, setJobs] = useState([]);
-  const [flag, setFlag] = useState(false)
-
+  const [flag, setFlag] = useState(false);
 
   useEffect(() => {
     fetch(`${process.env.REACT_APP_API_URL}viewJobs`)
@@ -30,14 +29,12 @@ function Job(props) {
       });
   }, []);
 
-  const viewSingleJob = (job) => {
-    console.log(job)
-    props.viewJob(job)
-    setFlag(true)
+  const applyJobHandler = () => {
+    
   }
 
   return (
-    <Sidebar isAdmin={props.isAdmin}>
+    <Sidebar isAdmin={props.isAdmin} isLogout={props.isLogout}>
       <Container>
         {/* <Card elevation={3}>
           <CardContent>
@@ -84,59 +81,60 @@ function Job(props) {
             </Grid>
           </CardContent>
         </Card> */}
-        {!flag && jobs.map((job) => {
-          return (
-            <Card elevation={3}>
-              <CardContent>
-                <Grid
-                  container
-                  direction="row"
-                  justifyContent="space-between"
-                  alignItems="center"
-                >
-                  <Grid item>
-                    <Grid
-                      container
-                      direction="row"
-                      justifyContent="flex-start"
-                      alignItems="center"
-                      spacing={3}
-                    >
-                      <Grid item>
-                        <Avatar
-                          alt="JP morgan logo"
-                          src="https://media2.vault.com/14343503/210909_jp-morgan_logo.jpg"
-                          sx={{ width: 56, height: 56 }}
-                        />
-                      </Grid>
-                      <Grid item>
-                        <Typography>{job.companyName}</Typography>
-                        <Typography sx={{ fontSize: 15, display: "flex" }}>
-                          {job.position}
-                        </Typography>
+        {!flag &&
+          jobs.map((job) => {
+            return (
+              <Card elevation={3}>
+                <CardContent>
+                  <Grid
+                    container
+                    direction="row"
+                    justifyContent="space-between"
+                    alignItems="center"
+                  >
+                    <Grid item>
+                      <Grid
+                        container
+                        direction="row"
+                        justifyContent="flex-start"
+                        alignItems="center"
+                        spacing={3}
+                      >
+                        <Grid item>
+                          <Avatar
+                            alt="JP morgan logo"
+                            src="https://media2.vault.com/14343503/210909_jp-morgan_logo.jpg"
+                            sx={{ width: 56, height: 56 }}
+                          />
+                        </Grid>
+                        <Grid item>
+                          <Typography>{job.companyName}</Typography>
+                          <Typography sx={{ fontSize: 15, display: "flex" }}>
+                            {job.position}
+                          </Typography>
+                        </Grid>
                       </Grid>
                     </Grid>
-                  </Grid>
-                  <Grid item>
-                    
-                    <Button
-                      variant="contained"
-                      onClick={() => {
-                        viewSingleJob(job)
-                      }}
-                      sx={{ display: "flex", justifyContent: "flex-end" }}
-                      startIcon={<CurrencyRupeeIcon />}
-                    >
-                      {job.salary} LPA
-                    </Button>
-                    <Typography>{job.type}</Typography>
-                  </Grid>
-                </Grid>
-              </CardContent>
-            </Card>
-          );
-        })}
+                    <Grid item>
+                      <Link to={`/jobDetails/${job._id}`} >
+                        <Button
+                          variant="contained"
+                          // onClick={() => {
 
+                          // }}
+                          sx={{ display: "flex", justifyContent: "flex-end" }}
+                          startIcon={<CurrencyRupeeIcon />}
+                        >
+                          {job.salary} LPA
+                        </Button>
+                      </Link>
+                      <Typography>{job.type}</Typography>
+                    </Grid>
+                  </Grid>
+                </CardContent>
+              </Card>
+            );
+          })}
       </Container>
     </Sidebar>
   );

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import Card from "@mui/material/Card";
@@ -10,7 +10,7 @@ import Sidebar from "../Sidebar";
 import Grid from "@mui/material/Grid";
 import ReplyIcon from "@mui/icons-material/Reply";
 import SendIcon from "@mui/icons-material/Send";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
 
@@ -28,12 +28,58 @@ const style = {
 
 function JobDetails(props) {
   const navigate = useNavigate();
+
+  const [job, setJob] = useState({});
+
+  const { jobId } = useParams();
+
+  useEffect(() => {
+    fetch(`${process.env.REACT_APP_API_URL}viewSingleJob/${jobId}`, {
+      method: "GET",
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("token"),
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        setJob(data.job);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    console.log(`${process.env.REACT_APP_API_URL}viewSingleJob/${jobId}`);
+  }, []);
+
   const [open, setOpen] = useState(false);
-  const handleOpen = () => {
-    setOpen(true);
-    console.log(props)
+
+  const handleApplyJob = () => {
+    console.log(`${process.env.REACT_APP_API_URL}applyForJob/${job._id}`)
+    fetch(`${process.env.REACT_APP_API_URL}applyForJob/${job._id}`, {
+      method: "PUT",
+      headers: {
+        "Authorization": "Bearer " + localStorage.getItem("token"),
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .then(data => {
+        setOpen(true)
+        console.log(data)
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    // console.log(props);
   };
-  const handleClose = () => setOpen(false);
+
+  const handleClose = () => {
+    setOpen(false);
+    navigate("/jobs");
+  };
   return (
     <Sidebar>
       <div>
@@ -62,9 +108,9 @@ function JobDetails(props) {
                     />
                   </Grid>
                   <Grid item>
-                    <Typography>JP Morgan Chase and Co</Typography>
+                    <Typography>{job.companyName}</Typography>
                     <Typography sx={{ fontSize: 15, display: "flex" }}>
-                      Software Engineer
+                      {job.position}
                     </Typography>
                   </Grid>
                 </Grid>
@@ -76,9 +122,9 @@ function JobDetails(props) {
                   sx={{ display: "flex", justifyContent: "flex-end" }}
                   startIcon={<CurrencyRupeeIcon />}
                 >
-                  12 LPA
+                  {job.salary} LPA
                 </Button>
-                <Typography sx={{ marginTop: 1 }}>Technical</Typography>
+                <Typography sx={{ marginTop: 1 }}>{job.type}</Typography>
               </Grid>
             </Grid>
 
@@ -149,13 +195,13 @@ function JobDetails(props) {
                   </Grid>
                   <Grid item>
                     <Typography sx={{ display: "flex", marginBottom: 1 }}>
-                      Technical
+                      {job.type}
                     </Typography>
                     <Typography sx={{ display: "flex", marginBottom: 1 }}>
-                      Super Dream
+                      {job.category}
                     </Typography>
                     <Typography sx={{ display: "flex", marginBottom: 1 }}>
-                      7
+                      {job.mingpa}
                     </Typography>
                   </Grid>
                 </Grid>
@@ -163,7 +209,7 @@ function JobDetails(props) {
                   <Button
                     variant="contained"
                     size="medium"
-                    onClick={handleOpen}
+                    onClick={handleApplyJob}
                     sx={{
                       display: "flex",
                       justifyContent: "flex-end",

@@ -76,7 +76,7 @@ export default function AdminLogin(props) {
           sm={4}
           md={7}
           sx={{
-            backgroundImage: "url(https://customer.impexdsr.in/images/bg.jpg)",
+            backgroundImage: "url(https://i.pinimg.com/originals/ac/14/0a/ac140a627af854f14c7f653efd7d53ae.gif)",
             backgroundRepeat: "no-repeat",
             backgroundColor: (t) =>
               t.palette.mode === "light"
