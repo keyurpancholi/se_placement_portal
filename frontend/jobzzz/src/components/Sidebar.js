@@ -15,6 +15,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import Box from '@mui/material/Box';
 import HomeIcon from '@mui/icons-material/Home';
 
+
 const drawerWidth = 240;
 
 function Sidebar({children}) {
@@ -41,6 +42,10 @@ function Sidebar({children}) {
           text: 'Logout',
          icon: <LogoutIcon color="white" />,
          path: '/'
+        },{
+          text: 'Applied students',
+         icon: <LogoutIcon color="white" />,
+         path: '/admin/appliedStudents'
         }
      ]
 
@@ -114,7 +119,7 @@ function Sidebar({children}) {
       <br />
          <div className='page'>
             <Container
-            sx={{marginTop:10}}>
+            sx={{marginTop:10,}}>
             {children}
             </Container>
        
