@@ -38,13 +38,11 @@ exports.login = (req, res, next) => {
         "seplacementportal",
         { expiresIn: "1h" }
       );
-      res
-        .status(200)
-        .json({
-          token: token,
-          userId: loadedUser._id.toString(),
-          message: "User logged in succesfully",
-        });
+      res.status(200).json({
+        token: token,
+        userId: loadedUser._id.toString(),
+        message: "User logged in succesfully",
+      });
     })
     .catch((err) => {
       if (!err.statusCode) {
@@ -116,7 +114,7 @@ exports.viewJobs = (req, res, next) => {
 exports.applyForJob = (req, res, next) => {
   const jobId = req.params.jobId;
   const userId = req.userId;
-  const email = req.email
+  const email = req.email;
 
   // user
   //   .updateOne(
@@ -131,9 +129,9 @@ exports.applyForJob = (req, res, next) => {
   //   .catch((err) => {
   //     console.log(err);
   //   });
-    user
+  user
     .findOne(
-      { _id: userId },
+      { _id: userId }
       // { $push: { jobs: { jobId: mongoose.Types.ObjectId(jobId) } } }
     )
     .then((user) => {
@@ -142,10 +140,13 @@ exports.applyForJob = (req, res, next) => {
         error.statusCode = 404;
         throw error;
       }
-      user.jobs.push(jobId)
-      return user.save()
-    }).then(result => {+
-      res.status(200).json({ message: "Applied for job successfully", user: result });
+      user.jobs.push(jobId);
+      return user.save();
+    })
+    .then((result) => {
+      +res
+        .status(200)
+        .json({ message: "Applied for job successfully", user: result });
     })
     .catch((err) => {
       console.log(err);
@@ -157,14 +158,34 @@ exports.viewSingleJob = (req, res, next) => {
 
   Job.findOne({ _id: ObjectId(jobId) })
     .then((job) => {
-      if(!job){
-        const error = new Error("No job found")
-        error.statusCode = 404
-        throw error
+      if (!job) {
+        const error = new Error("No job found");
+        error.statusCode = 404;
+        throw error;
       }
-      res.status(200).json({message: "Job fetched successfully", job: job})
+      res.status(200).json({ message: "Job fetched successfully", job: job });
     })
-    .catch(err => {
+    .catch((err) => {
+      if (!err.statusCode) {
+        err.statusCode = 500;
+      }
+      next(err);
+    });
+};
+
+exports.viewProfile = (req, res, next) => {
+  const userId = req.userId;
+
+  User.findOne({ _id: ObjectId(userId) }).populate('jobs')
+    .then(user => {
+      if (!user){
+        const error = new Error("No user found");
+        error.statusCode = 404;
+        throw error;
+      }
+      res.status(200).json({message: 'User profile fetched successfully', user: user})
+    })
+    .catch((err) => {
       if (!err.statusCode) {
         err.statusCode = 500;
       }

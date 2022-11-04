@@ -15,12 +15,12 @@ import { useLocation, useNavigate } from "react-router-dom";
 import Container from "@mui/material/Container";
 import "./Sidebar.css";
 import { white } from "@mui/material/colors";
-import LogoutIcon from "@mui/icons-material/Logout"
+import LogoutIcon from "@mui/icons-material/Logout";
+import HomeIcon from '@mui/icons-material/Home';
 
 const drawerWidth = 240;
 
 function Sidebar(props) {
-  
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -29,26 +29,26 @@ function Sidebar(props) {
       text: "Jobs",
       icon: <WorkIcon color="white" />,
       path: "/jobs",
-      action: 'jobs'
+      action: "jobs",
     },
     {
       text: "Add New Job",
       icon: <AddCircleIcon color="white" />,
       path: "/addJob",
-      action: 'addJob'
+      action: "addJob",
     },
     {
       text: "Profile",
       icon: <AccountBoxIcon color="white" />,
       path: "/profile",
-      action: 'profile'
+      action: "profile",
     },
     {
       text: "Logout",
       icon: <LogoutIcon color="white" />,
       path: "/",
-      action: 'logout'
-    }
+      action: "logout",
+    },
   ];
 
   const menuItems2 = [
@@ -56,27 +56,42 @@ function Sidebar(props) {
       text: "Jobs",
       icon: <WorkIcon color="white" />,
       path: "/jobs",
-      action: 'jobs'
+      action: "jobs",
     },
     {
       text: "View applied Jobs",
       icon: <AddCircleIcon color="white" />,
       path: "/viewAppliedJobs",
-      action: 'View jobs'
+      action: "View jobs",
     },
     {
       text: "Profile",
       icon: <AccountBoxIcon color="white" />,
       path: "/profile",
-      action: 'profile'
+      action: "profile",
     },
     {
       text: "Logout",
       icon: <LogoutIcon color="white" />,
       path: "/",
-      action: 'logout'
-    }
+      action: "logout",
+    },
   ];
+
+  const item = {
+    py: "2px",
+    px: 3,
+    color: "rgba(255, 255, 255, 0.7)",
+    "&:hover, &:focus": {
+      bgcolor: "rgba(255, 255, 255, 0.08)",
+    },
+  };
+
+  const itemCategory = {
+    boxShadow: "0 -1px 0 rgb(255,255,255,0.1) inset",
+    py: 1.5,
+    px: 3,
+  };
 
   return (
     <div className="root">
@@ -87,13 +102,13 @@ function Sidebar(props) {
           "& .MuiDrawer-paper": {
             width: drawerWidth,
             boxSizing: "border-box",
-            backgroundColor: "#e1f5fe",
+            backgroundColor: "#101F33",
           },
         }}
         variant="permanent"
         anchor="left"
       >
-        <Typography
+        {/* <Typography
           variant="h5"
           sx={{
             fontFamily: "initial",
@@ -103,59 +118,82 @@ function Sidebar(props) {
           }}
         >
           TPO Portal
-        </Typography>
-        <Divider />
+        </Typography> */}
+
+        {/* <Divider /> */}
+
         <List>
-          {/* {menuItems1.map((item) => (
-            <>
-              <ListItem
-                button
-                key={item.text}
-                onClick={() => {
-                  navigate(item.path);
-                }}
-              >
-                <ListItemIcon>{item.icon}</ListItemIcon>
-                <ListItemText primary={item.text} />
-              </ListItem>
-            </>
-          ))} */}
-          {props.isAdmin &&
-            menuItems1.map((item) => (
-              <>
-                <ListItem
-                  button
-                  key={item.text}
-                  onClick={() => {
-                    navigate(item.path);
-                  }}
-                >
-                  <ListItemIcon>{item.icon}</ListItemIcon>
-                  <ListItemText primary={item.text} />
-                </ListItem>
-              </>
-            ))}
-          {!props.isAdmin &&
-            menuItems2.map((item) => (
-              <>
-                <ListItem
-                  button
-                  key={item.text}
-                  onClick={() => {
-                    if(item.action==='logout'){
-                      localStorage.removeItem('userId')
-                      localStorage.removeItem('token')
-                      navigate(item.path)
-                    } else {
-                      navigate(item.path)
-                    }
-                  }}
-                >
-                  <ListItemIcon>{item.icon}</ListItemIcon>
-                  <ListItemText primary={item.text} />
-                </ListItem>
-              </>
-            ))}
+          <ListItem
+            sx={{
+              ...item,
+              ...itemCategory,
+              fontSize: 22,
+              color: "#ffff",
+              fontFamily: "inherit",
+            }}
+          >
+            TPO PORTAL
+          </ListItem>
+          <ListItem sx={{ ...item, ...itemCategory }}>
+            <ListItemIcon sx={{ color: "#ffff" }}>
+              <HomeIcon />
+            </ListItemIcon>
+            <ListItemText sx={{ color: "#ffff" }}>Placement</ListItemText>
+          </ListItem>
+
+          <Divider sx={{ color: "#fff" }} />
+          <List>
+            {props.isAdmin &&
+              menuItems1.map((item) => (
+                <>
+                  <ListItem
+                    button
+                    key={item.text}
+                    sx={{
+                      color: "#fff",
+                      "&:hover, &:focus": {
+                        bgcolor: "rgba(255, 255, 255, 0.08)",
+                      },
+                    }}
+                    onClick={() => {
+                      navigate(item.path);
+                    }}
+                  >
+                    <ListItemIcon sx={{ color: "#fff" }} >{item.icon}</ListItemIcon>
+                    <ListItemText primary={item.text} />
+                  </ListItem>
+                </>
+              ))}
+            {!props.isAdmin &&
+              menuItems2.map((item) => (
+                <>
+                  <ListItem
+                    button
+                    key={item.text}
+                    sx={{
+                      color: "#fff",
+                      "&:hover, &:focus": {
+                        bgcolor: "rgba(255, 255, 255, 0.08)",
+                      },
+                    }}
+                    onClick={() => {
+                      if (item.action === "logout") {
+                        localStorage.removeItem("userId");
+                        localStorage.removeItem("token");
+                        navigate(item.path);
+                      } else {
+                        navigate(item.path);
+                      }
+                    }}
+                  >
+                    <ListItemIcon sx={{ color: "#fff" }}>
+                      {item.icon}
+                    </ListItemIcon>
+                    <ListItemText primary={item.text} />
+                  </ListItem>
+                </>
+              ))}
+          </List>
         </List>
       </Drawer>
       <br />

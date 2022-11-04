@@ -10,6 +10,8 @@ router.get("/viewSingleJob/:jobId", userController.viewSingleJob)
 
 router.put("/applyForJob/:jobId", isAuth, userController.applyForJob);
 
+router.get("/viewProfile", isAuth, userController.viewProfile)
+
 router.post("/login", userController.login);
 
 router.post(

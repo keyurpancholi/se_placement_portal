@@ -68,6 +68,7 @@ function JobDetails(props) {
       .then((res) => res.json())
       .then(data => {
         setOpen(true)
+        navigate('/jobs')
         console.log(data)
       })
       .catch((err) => {
