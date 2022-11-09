@@ -116,19 +116,6 @@ exports.applyForJob = (req, res, next) => {
   const userId = req.userId;
   const email = req.email;
 
-  // user
-  //   .updateOne(
-  //     { _id: ObjectId(userId) },
-  //     // { $push: { jobs: { jobId: mongoose.Types.ObjectId(jobId) } } }
-  //   )
-  //   .then((user) => {
-  //     return user.save()
-  //   }).then(result => {+
-  //     res.status(200).json({ message: "Applied for job successfully", user: result });
-  //   })
-  //   .catch((err) => {
-  //     console.log(err);
-  //   });
   user
     .findOne(
       { _id: userId }

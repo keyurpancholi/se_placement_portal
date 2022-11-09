@@ -16,7 +16,7 @@ import Container from "@mui/material/Container";
 import "./Sidebar.css";
 import { white } from "@mui/material/colors";
 import LogoutIcon from "@mui/icons-material/Logout";
-import HomeIcon from '@mui/icons-material/Home';
+import HomeIcon from "@mui/icons-material/Home";
 
 const drawerWidth = 240;
 
@@ -24,6 +24,7 @@ function Sidebar(props) {
   const navigate = useNavigate();
   const location = useLocation();
 
+  // ADMIN SIDEBAR
   const menuItems1 = [
     {
       text: "Jobs",
@@ -37,12 +38,12 @@ function Sidebar(props) {
       path: "/addJob",
       action: "addJob",
     },
-    {
-      text: "Profile",
-      icon: <AccountBoxIcon color="white" />,
-      path: "/profile",
-      action: "profile",
-    },
+    // {
+    //   text: "Profile",
+    //   icon: <AccountBoxIcon color="white" />,
+    //   path: "/profile",
+    //   action: "profile",
+    // },
     {
       text: "Logout",
       icon: <LogoutIcon color="white" />,
@@ -51,6 +52,7 @@ function Sidebar(props) {
     },
   ];
 
+  // USER SIDEBAR
   const menuItems2 = [
     {
       text: "Jobs",
@@ -58,12 +60,12 @@ function Sidebar(props) {
       path: "/jobs",
       action: "jobs",
     },
-    {
-      text: "View applied Jobs",
-      icon: <AddCircleIcon color="white" />,
-      path: "/viewAppliedJobs",
-      action: "View jobs",
-    },
+    // {
+    //   text: "View applied Jobs",
+    //   icon: <AddCircleIcon color="white" />,
+    //   path: "/viewAppliedJobs",
+    //   action: "View jobs",
+    // },
     {
       text: "Profile",
       icon: <AccountBoxIcon color="white" />,
@@ -156,10 +158,19 @@ function Sidebar(props) {
                       },
                     }}
                     onClick={() => {
-                      navigate(item.path);
+                      if (item.action === "logout") {
+                        localStorage.removeItem("userId");
+                        localStorage.removeItem("token");
+                        navigate(item.path);
+                        props.isLogout();
+                      } else {
+                        navigate(item.path);
+                      }
                     }}
                   >
-                    <ListItemIcon sx={{ color: "#fff" }} >{item.icon}</ListItemIcon>
+                    <ListItemIcon sx={{ color: "#fff" }}>
+                      {item.icon}
+                    </ListItemIcon>
                     <ListItemText primary={item.text} />
                   </ListItem>
                 </>

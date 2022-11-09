@@ -84,6 +84,9 @@ function Job(props) {
         {!flag &&
           jobs.map((job) => {
             return (
+              <>
+              <br/>
+              <br />
               <Card elevation={3}>
                 <CardContent>
                   <Grid
@@ -91,6 +94,7 @@ function Job(props) {
                     direction="row"
                     justifyContent="space-between"
                     alignItems="center"
+                    
                   >
                     <Grid item>
                       <Grid
@@ -103,7 +107,7 @@ function Job(props) {
                         <Grid item>
                           <Avatar
                             alt="JP morgan logo"
-                            src="https://media2.vault.com/14343503/210909_jp-morgan_logo.jpg"
+                            src={job.imageUrl}
                             sx={{ width: 56, height: 56 }}
                           />
                         </Grid>
@@ -116,7 +120,7 @@ function Job(props) {
                       </Grid>
                     </Grid>
                     <Grid item>
-                      <Link to={`/jobDetails/${job._id}`} >
+                      <Link to={`/jobDetails/${job._id}`} style={{textDecoration:'none'}}>
                         <Button
                           variant="contained"
                           // onClick={() => {
@@ -133,6 +137,7 @@ function Job(props) {
                   </Grid>
                 </CardContent>
               </Card>
+              </>
             );
           })}
       </Container>

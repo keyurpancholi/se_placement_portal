@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import Sidebar from "../../components/Sidebar";
 import PropTypes from "prop-types";
 import AppBar from "@mui/material/AppBar";
@@ -28,6 +28,8 @@ import { blueGrey } from "@mui/material/colors";
 
 function Profile(props) {
   const [userDetails, setUserDetails] = useState({});
+  const department = useRef(null)
+  const cgpa = useRef(null)
 
   useEffect(() => {
     fetch(`${process.env.REACT_APP_API_URL}viewProfile`, {
@@ -48,8 +50,14 @@ function Profile(props) {
       });
   }, []);
 
+  const profileEditHandler = (e) => {
+    e.preventDefault();
+    
+    console.log(department.current.value, cgpa.current.value)
+  }
+
   return (
-    <Sidebar>
+    <Sidebar isLogout={props.isLogout} isAdmin={props.isAdmin}>
       <Card elevation={5}>
         <CardHeader
           avatar={
@@ -126,6 +134,7 @@ function Profile(props) {
                     readOnly: true,
                   }}
                   sx={{ display: "flex" }}
+                  ref={department}
                 />
               </Container>
               <br />
@@ -150,6 +159,7 @@ function Profile(props) {
                   defaultValue={userDetails.cgpa}
                   // defaultValue={2+2}
                   sx={{ display: "flex" }}
+                  ref={cgpa}
                 />
                 <br />
                 <div
@@ -164,6 +174,7 @@ function Profile(props) {
                     variant="contained"
                     sx={{ bgcolor: blueGrey[500] }}
                     size="large"
+                    onClick={profileEditHandler}
                   >
                     SAVE
                   </Button>
@@ -174,7 +185,7 @@ function Profile(props) {
           </Box>
         </Grid>
         <Grid item>
-          <Card sx={{ maxWidth: 400 }} elevation={5}>
+          <Card sx={{ width:300, alignItems: "stretch", }} elevation={5}>
             <br />
             <Typography
               variant="h5"
@@ -226,10 +237,10 @@ function Profile(props) {
                 <ListItemAvatar>
                   <Avatar
                     alt="JP morgan logo"
-                    src="https://media2.vault.com/14343503/210909_jp-morgan_logo.jpg"
+                    src={job.imageUrl}
                   />
                 </ListItemAvatar>
-                <ListItemText primary={`${job.companyName}`} secondary={`${job.salary}`} />
+                <ListItemText primary={`${job.companyName}`} secondary={`${job.salary} LPA`} />
               </ListItem>
               
               })}

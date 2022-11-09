@@ -41,7 +41,7 @@ exports.addUser = (req, res, next) => {
 };
 
 exports.addNewJob = (req, res, next) => {
-  const {companyName, position, salary, description, type, category, mingpa} = req.body
+  const {companyName, position, salary, description, type, category,imageUrl, mingpa} = req.body
 
   const job = new Job({
     companyName: companyName,
@@ -50,6 +50,7 @@ exports.addNewJob = (req, res, next) => {
     description: description,
     type: type,
     category: category,
+    imageUrl: imageUrl,
     mingpa: mingpa
   });
 

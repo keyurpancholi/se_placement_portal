@@ -40,8 +40,8 @@ export default function HomePage() {
       <AppBar position="relative" >
         <Toolbar>
           <WorkIcon sx={{ mr: 2 }} />
-          <Typography variant="h6" color="inherit" noWrap
-          sx={{fontFamily:'fantasy',fontWeight:'bold'}}>
+          <Typography variant="h6"  noWrap
+          sx={{fontFamily:'monospace',}}>
             Job Portal
           </Typography>
         </Toolbar>
@@ -58,7 +58,7 @@ export default function HomePage() {
             backgroundRepeat: 'no-repeat',
             backgroundColor: (t) =>
               t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
-            backgroundSize:'cover',
+            backgroundSize:'contain',
             backgroundPosition: 'center',
           }}
         />
@@ -79,12 +79,12 @@ export default function HomePage() {
               align="center"
               color="text.primary"
               gutterBottom
-              sx={{fontFamily:'fantasy',fontWeight:'bold'}}
+              sx={{fontFamily:'monospace',fontWeight:'bold'}}
             >
               TPO Portal
             </Typography>
             <Typography variant="h5" align="center" color="text.secondary" paragraph
-            sx={{fontFamily:'fantasy',fontWeight:'bold'}}>
+            sx={{fontFamily:'monospace',fontWeight:'bold'}}>
               Welcome to the Job Portal! 
               Click login for either admin or student 
             </Typography>

@@ -27,8 +27,13 @@ const jobSchema = new Schema(
       type: String,
       required: true,
     },
+    imageUrl:{ 
+      type: String,
+      required: true
+    },
     mingpa: {
-        type: Number
+        type: Number,
+        required: true
     }
   },
   { timestamps: true }

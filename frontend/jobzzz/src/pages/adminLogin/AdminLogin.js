@@ -60,6 +60,7 @@ export default function AdminLogin(props) {
         navigate('/addJob')
         localStorage.setItem('userId', data.userId)
         localStorage.setItem('token', data.token)
+        props.checkAdmin()
       })
       .catch((err) => {
         console.log(err);

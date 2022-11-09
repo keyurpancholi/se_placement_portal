@@ -82,7 +82,7 @@ function JobDetails(props) {
     navigate("/jobs");
   };
   return (
-    <Sidebar>
+    <Sidebar isLogout={props.isLogout} isAdmin={props.isAdmin} >
       <div>
         <Card elevation={3}>
           <CardContent>
@@ -103,8 +103,8 @@ function JobDetails(props) {
                 >
                   <Grid item>
                     <Avatar
-                      alt="JP morgan logo"
-                      src="https://media2.vault.com/14343503/210909_jp-morgan_logo.jpg"
+                      alt={job.companyName}
+                      src={job.imageUrl}
                       sx={{ width: 56, height: 56 }}
                     />
                   </Grid>
@@ -207,7 +207,7 @@ function JobDetails(props) {
                   </Grid>
                 </Grid>
                 <div>
-                  <Button
+                  {!props.isAdmin && <Button
                     variant="contained"
                     size="medium"
                     onClick={handleApplyJob}
@@ -219,7 +219,7 @@ function JobDetails(props) {
                     endIcon={<SendIcon />}
                   >
                     Apply
-                  </Button>
+                  </Button>}
                   <Modal
                     open={open}
                     onClose={handleClose}

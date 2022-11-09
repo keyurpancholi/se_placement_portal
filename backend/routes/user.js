@@ -1,8 +1,10 @@
 const router = require("express").Router();
-const userController = require("../controllers/user");
+// const userController = require("../controllers/user");
 const { body } = require("express-validator");
 const User = require("../models/user");
 const isAuth = require("../middleware/isAuth")
+const user = require('../controllers/user-w-classes')
+const userController = new user()
 
 router.get("/viewJobs", userController.viewJobs);
 

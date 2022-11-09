@@ -18,12 +18,14 @@ function AddJob(props) {
   const [nameError, setNameError] = useState(false);
   const [position, setPosition] = useState("");
   const [positionError, setPositionError] = useState(false);
-  const [salary, setSalary] = useState("");
+  const [salary, setSalary] = useState();
   const [salaryError, setSalaryError] = useState(false);
   const [type, setType] = useState("");
   const [typeError, setTypeError] = useState(false);
   const [category, setCategory] = useState("");
   const [categoryError, setCategoryError] = useState(false);
+  const [imageUrl, setImageUrl] = useState("")
+  const [imageUrlError, setImageUrlError] = useState(false)
   const [desc, setDesc] = useState("");
   const [descError, setDescError] = useState(false);
   const [cgpa, setCgpa] = useState("");
@@ -53,7 +55,9 @@ function AddJob(props) {
 
     if (salary == "") setSalaryError(true);
 
-    if (name && position && salary && type && category && desc && cgpa) {
+    if (imageUrl == "") setImageUrlError(true)
+
+    if (name && position && salary && type && category && desc && cgpa && imageUrl) {
       fetch(`${process.env.REACT_APP_API_URL}admin/addNewJob`, {
         method: "POST",
         headers: {
@@ -68,6 +72,7 @@ function AddJob(props) {
           description: desc,
           type: type,
           category: category,
+          imageUrl: imageUrl,
           mingpa: cgpa,
         }),
       })
@@ -80,7 +85,8 @@ function AddJob(props) {
           setDesc('')
           setType('')
           setCategory('')
-          setCgpa()
+          setCgpa('')
+          setImageUrl('')
         })
         .catch((err) => {
           console.log(err);
@@ -89,7 +95,7 @@ function AddJob(props) {
   };
 
   return (
-    <Sidebar isLogout={props.isLogout} >
+    <Sidebar isLogout={props.isLogout} isAdmin={props.isAdmin}>
       <Container
         sx={{
           backgroundColor: "#f5f5f5",
@@ -125,6 +131,7 @@ function AddJob(props) {
             fullWidth
             required
             error={nameError}
+            value={name}
           />
           <TextField
             onChange={(e) => setPosition(e.target.value)}
@@ -139,6 +146,7 @@ function AddJob(props) {
             fullWidth
             required
             error={positionError}
+            value={position}
           />
           <TextField
             onChange={(e) => setSalary(e.target.value)}
@@ -154,6 +162,7 @@ function AddJob(props) {
             required
             error={salaryError}
             type="number"
+            value={salary}
           />
           <TextField
             onChange={(e) => setDesc(e.target.value)}
@@ -170,6 +179,7 @@ function AddJob(props) {
             fullWidth
             required
             error={descError}
+            value={desc}
           />
           <TextField
             onChange={(e) => setType(e.target.value)}
@@ -184,6 +194,7 @@ function AddJob(props) {
             fullWidth
             required
             error={typeError}
+            value={type}
           />
           <TextField
             onChange={(e) => setCategory(e.target.value)}
@@ -199,6 +210,23 @@ function AddJob(props) {
             fullWidth
             required
             error={categoryError}
+            value={category}
+          />
+          <TextField
+            onChange={(e) => setImageUrl(e.target.value)}
+            
+            sx={{
+              marginTop: 3,
+              marginBottom: 3,
+              display: "block",
+            }}
+            label="Image URL"
+            variant="outlined"
+            color="primary"
+            fullWidth
+            required
+            error={imageUrlError}
+            value={imageUrl}
           />
           <TextField
             onChange={(e) => setCgpa(e.target.value)}
@@ -215,6 +243,7 @@ function AddJob(props) {
             required
             error={cgpaError}
             type="number"
+            value={cgpa}
           />
           <br />
           <Button

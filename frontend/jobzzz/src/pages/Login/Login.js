@@ -15,6 +15,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import {useState} from "react"
 import {useNavigate, Link} from "react-router-dom"
 
+
 function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
@@ -33,6 +34,7 @@ const theme = createTheme();
 export default function SignInSide(props) {
 
   const navigate = useNavigate()
+
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -57,7 +59,7 @@ export default function SignInSide(props) {
       .then((data) => {
         localStorage.setItem('token', data.token)
         localStorage.setItem('userId', data.userId)
-
+    
         navigate("/jobs");
       })
       .catch((err) => {
@@ -66,8 +68,11 @@ export default function SignInSide(props) {
       });
   };
 
+  
+
   return (
     <ThemeProvider theme={theme}>
+      
       <Grid container component="main" sx={{ height: '100vh' }}>
         <CssBaseline />
         <Grid
@@ -80,7 +85,7 @@ export default function SignInSide(props) {
             backgroundRepeat: 'no-repeat',
             backgroundColor: (t) =>
               t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
-            backgroundSize: 'cover',
+            backgroundSize: 'contain',
             backgroundPosition: 'center',
           }}
         />

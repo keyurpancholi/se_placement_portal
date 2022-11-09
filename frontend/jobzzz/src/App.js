@@ -22,12 +22,11 @@ function App() {
   };
 
   const logoutHandler = () => {
-    navigate('/')    
+    navigate('/')
+    setIsAdmin(false)    
   }
 
-  const viewSingleJobHandler = (job) => {
-    
-  }
+
 
   return (
     <div className="App">
@@ -36,7 +35,7 @@ function App() {
         <Route exact path="/" element={<HomePage />}></Route>
         <Route path="/signup" element={<Signup />}></Route>
         <Route path="/login" element={<Login />}></Route>
-        <Route path="/jobs" element={<Job isAdmin={isAdmin} />} viewJob={viewSingleJobHandler} isLogout={logoutHandler} />
+        <Route path="/jobs" element={<Job isAdmin={isAdmin} />} isLogout={logoutHandler} />
         <Route path="/addJob" element={<AddJob isAdmin={isAdmin} isLogout={logoutHandler} />} />
         <Route path="/profile" element={<Profile isAdmin={isAdmin} isLogout={logoutHandler} />} />
         <Route path="/jobDetails/:jobId" element={<JobDetails isAdmin={isAdmin} isLogout={logoutHandler} />} />
