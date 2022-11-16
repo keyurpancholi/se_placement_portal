@@ -7,68 +7,97 @@ const Admin = require("../models/admin");
 const bcrpyt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const { validationResult } = require("express-validator");
+const { addJob, addUser } = require("../util/services");
 
-exports.addUser = (req, res, next) => {
+
+exports.addUser = async (req, res, next) => {
   const username = req.body.username;
   const email = req.body.email;
   const password = req.body.password;
   const cgpa = req.body.cgpa;
   const branch = req.body.branch;
 
-  bcrpyt
-    .hash(password, 12)
-    .then((hpw) => {
-      const user = new user({
-        username: username,
-        email: email,
-        password: hpw,
-        cgpa: cgpa,
-        branch: branch,
-      });
-      return user.save();
-    })
-    .then((user) => {
-      res
-        .status(201)
-        .json({ message: "User created successfully", result: user });
-    })
-    .catch((err) => {
-      if (!err.statusCode) {
-        err.statusCode = 500;
-      }
-      next(err);
-    });
+  // const AllUser = bcrpyt.hash(password).then(() => {
+  //   addUser(AllUser, req.body)
+  // })
+
+  const AllUser = User.find({}).then(() => {
+    return bcrpyt.hash(password, 12)
+  }).then(() => {
+    addUser(AllUser, req.body)
+  }).catch(e => console.log(e))
+
+  User.deleteMany({}).then().catch(e => console.log(e))
+  User.insertMany(AllUser).then().catch(e => {console.log(e)})
+
+  // bcrpyt
+  //   .hash(password, 12)
+  //   .then((hpw) => {
+  //     const user = new user({
+  //       username: username,
+  //       email: email,
+  //       password: hpw,
+  //       cgpa: cgpa,
+  //       branch: branch,
+  //     });
+  //     return user.save();
+  //   })
+  //   .then((user) => {
+  //     res
+  //       .status(201)
+  //       .json({ message: "User created successfully", result: user });
+  //   })
+  //   .catch((err) => {
+  //     if (!err.statusCode) {
+  //       err.statusCode = 500;
+  //     }
+  //     next(err);
+  //   });
 };
 
 exports.addNewJob = (req, res, next) => {
   const {companyName, position, salary, description, type, category,imageUrl, mingpa} = req.body
 
-  const job = new Job({
-    companyName: companyName,
-    position: position,
-    salary: salary,
-    description: description,
-    type: type,
-    category: category,
-    imageUrl: imageUrl,
-    mingpa: mingpa
-  });
+  // const job = new Job({
+  //   companyName: companyName,
+  //   position: position,
+  //   salary: salary,
+  //   description: description,
+  //   type: type,
+  //   category: category,
+  //   imageUrl: imageUrl,
+  //   mingpa: mingpa
+  // });
 
-  job
-    .save()
-    .then((result) => {
-      if (!result) {
-        const error = new Error("Failed to create user");
-        error.statusCode = 422;
-        throw error;
-      }
-      res
+  // addJib(AllJob,req.body  ){AllJob.push(req.body)}
+  //await Job.deleteMany({})
+  // await Job.insertMany(AllJob)
+
+  const Alljobs = Job.find({}).then(() => {
+    addJob(Alljobs, req.body)
+  }).catch(e => {console.log(e)})
+
+  Job.deleteMany({}).then().catch(e => {console.log(e)})
+  Job.insertMany(Alljobs).then().catch(e => {console.log(e)})
+
+  // job
+  //   .save()
+  //   .then((result) => {
+  //     if (!result) {
+  //       const error = new Error("Failed to create user");
+  //       error.statusCode = 422;
+  //       throw error;
+  //     }
+  //     res
+  //       .status(201)
+  //       .json({ message: "Job created successfully", job: result });
+  //   })
+  //   .catch((err) => {
+  //     console.log(err);
+  //   });
+  res
         .status(201)
-        .json({ message: "Job created successfully", job: result });
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+        .json({ message: "Job created successfully"});
 };
 
 exports.signup = (req, res, next) => {
