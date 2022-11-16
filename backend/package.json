@@ -4,12 +4,14 @@
   "description": "jobzzz backend",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha test",
     "start": "nodemon app.js"
   },
   "author": "keyur pancholi",
   "license": "ISC",
   "devDependencies": {
+    "chai": "^4.3.7",
+    "mocha": "^10.1.0",
     "nodemon": "^2.0.19"
   },
   "dependencies": {
@@ -22,6 +24,7 @@
     "mongodb": "^4.9.1",
     "mongoose": "^6.6.0",
     "mysql2": "^2.3.3",
+    "request": "^2.88.2",
     "sequelize": "^6.21.4"
   }
 }

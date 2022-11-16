@@ -81,7 +81,7 @@ function AddJob(props) {
           console.log(data);
           setName('')
           setPosition('')
-          setSalary()
+          setSalary('')
           setDesc('')
           setType('')
           setCategory('')

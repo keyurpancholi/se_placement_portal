@@ -141,9 +141,9 @@ function JobDetails(props) {
                 </Typography>
                 <br />
                 <Typography variant="h6" sx={{ fontSize: 20, display: "flex" }}>
-                  Eligibility
+                  {job.description}
                 </Typography>
-                <Typography sx={{ display: "flex" }}>
+                {/* <Typography sx={{ display: "flex" }}>
                   5 students graduating in 2021
                 </Typography>
                 <Typography sx={{ display: "flex" }}>
@@ -156,7 +156,7 @@ function JobDetails(props) {
                   Shortlisting process - Each level is an elimination round
                   Online test - Pre-recorded Video Interview - Code for good
                   Event
-                </Typography>
+                </Typography> */}
                 {/* <Typography>{props.job}</Typography> */}
                 <Grid
                   container

@@ -29,9 +29,7 @@ function Job(props) {
       });
   }, []);
 
-  const applyJobHandler = () => {
-    
-  }
+
 
   return (
     <Sidebar isAdmin={props.isAdmin} isLogout={props.isLogout}>

@@ -22,8 +22,8 @@ function App() {
   };
 
   const logoutHandler = () => {
-    navigate('/')
     setIsAdmin(false)    
+    navigate('/')
   }
 
 
@@ -32,7 +32,7 @@ function App() {
     <div className="App">
       <Routes>
         {/* <Route exact path="/" element={<Home />}></Route> */}
-        <Route exact path="/" element={<HomePage />}></Route>
+        <Route exact path="/" element={<HomePage data-testid="test-homepage" />}></Route>
         <Route path="/signup" element={<Signup />}></Route>
         <Route path="/login" element={<Login />}></Route>
         <Route path="/jobs" element={<Job isAdmin={isAdmin} />} isLogout={logoutHandler} />

@@ -95,8 +95,10 @@ function Sidebar(props) {
     px: 3,
   };
 
+  console.log(props.isAdmin)
+
   return (
-    <div className="root">
+    <div className="root" data-testid="test-sidebar">
       <Drawer
         sx={{
           width: drawerWidth,

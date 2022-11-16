@@ -59,7 +59,6 @@ export default function SignInSide(props) {
       .then((data) => {
         localStorage.setItem('token', data.token)
         localStorage.setItem('userId', data.userId)
-    
         navigate("/jobs");
       })
       .catch((err) => {
@@ -126,10 +125,10 @@ export default function SignInSide(props) {
                 id="password"
                 autoComplete="current-password"
               />
-              <FormControlLabel
+              {/* <FormControlLabel
                 control={<Checkbox value="remember" color="primary" />}
                 label="Remember me"
-              />
+              /> */}
               <Button
                 type="submit"
                 fullWidth
