@@ -94,7 +94,7 @@ export default function HomePage() {
               spacing={2}
               justifyContent="center"
             >
-              <Button variant="contained" onClick={() => navigate('/admin/login')} size='large' >Admin Login</Button>
+              <Button variant="contained" onClick={() => navigate('/admin/login')} size='large' >Login admin</Button>
               <Button variant="contained" onClick={() => navigate('/login')} size='large' data-testid="test-student-login-btn">Student Login</Button>
             </Stack>
           </Container>
