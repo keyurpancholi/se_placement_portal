@@ -1,3 +1,4 @@
 /backend/node_modules
+/backend/.env.local
 /frontend/jobzzz/node_modules
 /frontend/jobzzz/.env.local
