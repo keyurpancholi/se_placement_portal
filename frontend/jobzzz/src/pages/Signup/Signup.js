@@ -49,7 +49,7 @@ export default function SignUp() {
     const _password = data.get("password");
 
     setIsLoading(true)
-    fetch(`${process.env.REACT_APP_API_URL}signup`, {
+    fetch(`${process.env.REACT_APP_API_URL}/signup`, {
       method: "POST",
       headers: {
         'Content-Type': 'application/json',

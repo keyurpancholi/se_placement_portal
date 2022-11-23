@@ -58,7 +58,7 @@ function AddJob(props) {
     if (imageUrl == "") setImageUrlError(true)
 
     if (name && position && salary && type && category && desc && cgpa && imageUrl) {
-      fetch(`${process.env.REACT_APP_API_URL}admin/addNewJob`, {
+      fetch(`${process.env.REACT_APP_API_URL}/admin/addNewJob`, {
         method: "POST",
         headers: {
           "Authorization": "Bearer " + localStorage.getItem("token"),

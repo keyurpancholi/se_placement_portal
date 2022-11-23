@@ -18,7 +18,7 @@ function Job(props) {
   const [flag, setFlag] = useState(false);
 
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_API_URL}viewJobs`)
+    fetch(`${process.env.REACT_APP_API_URL}/viewJobs`)
       .then((res) => res.json())
       .then((data) => {
         console.log(data);

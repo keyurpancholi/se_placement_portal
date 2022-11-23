@@ -32,7 +32,7 @@ function Profile(props) {
   const cgpa = useRef(null)
 
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_API_URL}viewProfile`, {
+    fetch(`${process.env.REACT_APP_API_URL}/viewProfile`, {
       method: "GET",
       headers: {
         "Authorization": "Bearer " + localStorage.getItem("token"),

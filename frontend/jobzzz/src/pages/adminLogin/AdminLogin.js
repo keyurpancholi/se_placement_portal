@@ -43,7 +43,7 @@ export default function AdminLogin(props) {
     const _email = data.get("email");
     const _password = data.get("password");
 
-    fetch(`${process.env.REACT_APP_API_URL}admin/login`, {
+    fetch(`${process.env.REACT_APP_API_URL}/admin/login`, {
       method: "POST",
       body: JSON.stringify({
         email: _email,

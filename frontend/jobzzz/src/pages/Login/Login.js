@@ -40,7 +40,7 @@ export default function SignInSide(props) {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
 
-    fetch("http://localhost:8080/login", {
+    fetch(`${process.env.REACT_APP_API_URL}/login`, {
       method: "POST",
       body: JSON.stringify({
         email: data.get('email'),
