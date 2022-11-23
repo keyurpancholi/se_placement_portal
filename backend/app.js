@@ -1,6 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
+require("dotenv").config()
 
 const adminRoutes = require("../backend/routes/admin");
 const userRoutes = require("../backend/routes/user");
@@ -28,8 +29,9 @@ app.use((err, req, res, next) => {
 app.use("/admin", adminRoutes);
 app.use(userRoutes);
 
+
 mongoose.connect(
-  "mongodb+srv://keyurpancholi:acqualeo7@cluster0.pahmv1w.mongodb.net/tpoPortal?retryWrites=true&w=majority"
+  process.env.MONGODB_URL
 ).then(res => {
   console.log('App connected succesfully')
   app.listen(port)
