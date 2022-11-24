@@ -94,22 +94,22 @@ class Users {
     };
 
     viewJobs = (req, res, next) => {
-        // Job.find()
-        //   .then((posts) => {
-        //     if (!posts) {
-        //       const error = new Error("No posts found");
-        //       error.statusCode = 404;
-        //       throw error;
-        //     }
-        //     res.status(200).json({ posts: posts, message: "Posts found" });
-        //   })
-        //   .catch((err) => {
-        //     if (!err.statusCode) {
-        //       err.statusCode = 500;
-        //     }
-        //     next(err);
-        //   });
-        res.status(200).json({message: "NO jobs", posts: {}})
+        Job.find()
+          .then((posts) => {
+            if (!posts) {
+              const error = new Error("No posts found");
+              error.statusCode = 404;
+              throw error;
+            }
+            res.status(200).json({ posts: posts, message: "Posts found" });
+          })
+          .catch((err) => {
+            if (!err.statusCode) {
+              err.statusCode = 500;
+            }
+            next(err);
+          });
+        
     };
 
     applyForJob = (req, res, next) => {
