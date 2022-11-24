@@ -109,7 +109,7 @@ class Users {
         //     }
         //     next(err);
         //   });
-        res.status(200).send(<h1>Empty jobs</h1>)
+        res.status(200).json({message: "NO jobs", posts: {}})
     };
 
     applyForJob = (req, res, next) => {
